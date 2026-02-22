@@ -36,21 +36,22 @@ docker run --rm \
   -e COOLIFY_URL \
   -e COOLIFY_TOKEN \
   -e PATROL_AUTO_DISCOVER \
-  ghcr.io/chrisdietr/coolify-patrol:latest
+  coolify-patrol:latest
 ```
 
 ### 2. Deploy in Coolify
 
-1. Create a new **Docker** service in Coolify
-2. Use image: `ghcr.io/chrisdietr/coolify-patrol:latest`
-3. Set environment variables in Coolify UI:
+1. Create a new **Git Repository** service in Coolify
+2. Connect repository: `https://github.com/chrisdietr/coolify-patrol`
+3. Let Coolify build from the included `Dockerfile`
+4. Set environment variables in Coolify UI:
    ```
    COOLIFY_URL=http://localhost:8000
    COOLIFY_TOKEN=your-api-token-here  
    PATROL_AUTO_DISCOVER=true
    ```
-4. Expose port 8080 for health checks
-5. Deploy! 🚀
+5. Expose port 8080 for health checks
+6. Deploy! 🚀
 
 ### 3. Advanced: YAML Configuration (Optional)
 
@@ -61,7 +62,7 @@ cp patrol.yaml.example patrol.yaml
 # Edit patrol.yaml, then:
 docker run --rm \
   -v $(pwd)/patrol.yaml:/config/patrol.yaml:ro \
-  ghcr.io/chrisdietr/coolify-patrol:latest
+  coolify-patrol:latest
 ```
 
 ## Configuration

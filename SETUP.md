@@ -52,9 +52,10 @@ You can find UUIDs in:
 
 ### Simple Docker Service (Recommended)
 
-1. **Create new Docker service** in Coolify
-2. **Set image:** `ghcr.io/chrisdietr/coolify-patrol:latest`
-3. **Add environment variables** in Coolify UI:
+1. **Create new Git Repository service** in Coolify
+2. **Set repository:** `https://github.com/chrisdietr/coolify-patrol`
+3. **Build from the included Dockerfile**
+4. **Add environment variables** in Coolify UI:
    ```
    COOLIFY_URL=http://localhost:8000
    COOLIFY_TOKEN=your-api-token-here
@@ -62,8 +63,8 @@ You can find UUIDs in:
    PATROL_INTERVAL=15m
    PATROL_POLICY=auto-patch
    ```
-4. **Expose port 8080** for health checks
-5. **Deploy!** 🚀
+5. **Expose port 8080** for health checks
+6. **Deploy!** 🚀
 
 ### Advanced: Docker Compose
 
@@ -72,7 +73,8 @@ For custom configurations, use docker-compose:
 ```yaml
 services:
   coolify-patrol:
-    image: ghcr.io/chrisdietr/coolify-patrol:latest
+    build:
+      context: .
     environment:
       - COOLIFY_URL=http://localhost:8000
       - COOLIFY_TOKEN=your-api-token-here

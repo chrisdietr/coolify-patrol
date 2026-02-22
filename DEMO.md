@@ -39,11 +39,11 @@ docker run -d \
   -e PATROL_INTERVAL=15m \
   -e PATROL_DRY_RUN=false \
   -p 8080:8080 \
-  ghcr.io/chrisdietr/coolify-patrol:latest
+  coolify-patrol:latest
 ```
 
 ### 4. Coolify UI Configuration
-When deploying in Coolify, simply add these environment variables in the UI:
+When deploying in Coolify from the Git repository (`https://github.com/chrisdietr/coolify-patrol`), let Coolify build the included `Dockerfile` and then add these environment variables in the UI:
 
 **Required:**
 - `COOLIFY_URL` = `http://localhost:8000`

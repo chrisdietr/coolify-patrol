@@ -30,8 +30,8 @@ docker-build:
 		--build-arg VERSION=$(VERSION) \
 		--build-arg COMMIT=$(COMMIT) \
 		--build-arg DATE=$(DATE) \
-		-t ghcr.io/chrisdietr/coolify-patrol:$(VERSION) \
-		-t ghcr.io/chrisdietr/coolify-patrol:latest \
+		-t coolify-patrol:$(VERSION) \
+		-t coolify-patrol:latest \
 		.
 
 run: build
