@@ -1,0 +1,68 @@
+# Coolify Patrol Configuration Example
+# Copy this file to patrol.yaml and customize for your environment
+
+coolify:
+  # Coolify server URL
+  url: http://localhost:8000  # or https://coolify.example.com
+  # API token from Coolify dashboard -> API Tokens
+  token: ${COOLIFY_API_TOKEN}
+
+# Default settings applied to all applications
+defaults:
+  # Update policy: auto-patch | auto-minor | auto-all | notify-only
+  policy: auto-patch
+  
+  # How often to check for updates
+  interval: 15m
+  
+  # Cooldown period after an update (prevents rapid successive updates)
+  cooldown: 1h
+  
+  # Tag patterns to exclude (prerelease versions)
+  exclude_patterns:
+    - "-alpha"
+    - "-beta"
+    - "-rc"
+    - "-dev"
+    - "-nightly"
+
+# Applications to monitor
+# If this section is empty or missing, Patrol will auto-discover all Coolify apps
+apps:
+  # Example: n8n workflow automation
+  - name: n8n
+    uuid: your-app-uuid-from-coolify
+    image: n8nio/n8n
+    # policy: auto-patch (inherited from defaults)
+
+  # Example: Plausible Analytics
+  - name: plausible
+    uuid: another-app-uuid
+    image: ghcr.io/plausible/community-edition
+    policy: auto-minor  # Allow minor version updates
+
+  # Example: PostgreSQL with major version pinning
+  - name: postgres
+    uuid: postgres-app-uuid
+    image: postgres
+    pin: "17"           # Stay within 17.x.x, never update to 18.x
+    policy: auto-patch  # Only patch updates within pinned major version
+
+  # Example: Redis
+  - name: redis
+    uuid: redis-app-uuid
+    image: redis
+    pin: "7"
+    policy: auto-patch
+
+  # Example: Grafana (notify-only mode)
+  - name: grafana
+    uuid: grafana-app-uuid
+    image: grafana/grafana
+    policy: notify-only  # Just log available updates, don't auto-update
+
+# To get your app UUIDs, run:
+# coolify-patrol discover
+#
+# Or find them in Coolify dashboard URLs:
+# https://coolify.example.com/application/your-app-uuid
